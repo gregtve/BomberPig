@@ -11,6 +11,8 @@ public class BombSpawner : MonoBehaviour
 
     private int explosionLength;
 
+    private bool bombButtonPressed = false;
+
     private void Start()
     {
         bombCapacity = GameManager.Instance.bombCapacity;
@@ -18,9 +20,15 @@ public class BombSpawner : MonoBehaviour
         bombCount = bombCapacity;
     }
 
+    public void BombButtonPressed()
+    {
+        bombButtonPressed = true;
+        Debug.Log("PRESSED BOMB");
+    }
+
     private void Update()
     {
-        if ((bombCount > 0) && Input.GetKeyDown(KeyCode.Space))
+        if ((bombCount > 0) && bombButtonPressed)//Input.GetKeyDown(KeyCode.Space))
         {
             Vector3Int cell = tilemap.WorldToCell(transform.position);
             Debug.Log("cell" + cell);
@@ -30,6 +38,7 @@ public class BombSpawner : MonoBehaviour
             SpawnBomb(cellCentrePosition); 
            
             bombCount -= 1;
+            bombButtonPressed = false;///////////////
         }
     }
 

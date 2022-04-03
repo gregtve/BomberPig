@@ -15,6 +15,12 @@ public class BomberDude : MonoBehaviour, IMortal
 
     private Vector2 movement;
 
+
+
+    public Joystick joystick;
+    ///public GameObject bomButton;
+
+
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -26,7 +32,10 @@ public class BomberDude : MonoBehaviour, IMortal
 
     private void Update()
     {
-        movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        /////movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        ///
+
+        movement = new Vector2(joystick.Horizontal, joystick.Vertical);
         movement.Normalize();
 
 
@@ -50,6 +59,10 @@ public class BomberDude : MonoBehaviour, IMortal
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
+
+
+    //////public void BombButtonIsPressed()
+    
 
     public void Die()
     {
